@@ -1,0 +1,395 @@
+% bxwinenc.sty
+
+%% package declaration
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{bxwinenc}[2013/02/11 v0.2]
+
+%% preparations
+\def\bxwe@pkgname{bxwinenc}
+\def\bxwe@error{\PackageError\bxwe@pkgname}
+\providecommand{\bxDebug}[1]{}
+
+%% variables
+\let\bxwe@dflt@enc\@empty
+\newif\ifbxwe@mapload
+\newif\ifbxwe@pdftex
+
+%% option handling
+\DeclareOption{OT1}{\def\bxwe@dflt@enc{OT1}}
+\DeclareOption{T1}{\def\bxwe@dflt@enc{T1}}
+\DeclareOption{WT1}{\def\bxwe@dflt@enc{WT1}}
+\DeclareOption{nomapload}{\bxwe@maploadfalse}
+\DeclareOption{mapload}{\bxwe@maploadtrue}
+\ExecuteOptions{WT1,nomapload}
+\ProcessOptions*
+\bxDebug{default=\bxwe@dflt@enc}
+
+%--------------------------------------- load mapfile
+
+% check engine
+\bxwe@pdftexfalse
+\ifx\pdfoutput\@undefined\else \ifnum\pdfoutput>0
+  \bxwe@pdftextrue
+\fi\fi
+% load map file
+\ifbxwe@mapload
+  \ifbxwe@pdftex
+    \pdfmapfile{=pdftex-bxttnfss.map}
+  \else
+    \AtBeginDvi{\special{pdf:mapfile pdftex-bxttnfss.map}}
+  \fi
+\fi
+
+%--------------------------------------- WT1 encoding declaration
+
+% encoding 'WT1'
+\DeclareFontEncoding{WT1}{}{}
+\DeclareFontSubstitution{WT1}{wns}{m}{n}
+% family 'wa1'
+\DeclareFontFamily{WT1}{wa1}{}
+\DeclareFontShape{WT1}{wa1}{m}{n}{<->wa1r8t}{}
+\DeclareFontShape{WT1}{wa1}{m}{sc}{<->wa1rc8t}{}
+\DeclareFontShape{WT1}{wa1}{m}{bk}{<->wa1c8t}{}
+\DeclareFontShape{WT1}{wa1}{m}{sl}{<->wa1ri8t}{}
+\DeclareFontShape{WT1}{wa1}{b}{n}{<->wa1b8t}{}
+\DeclareFontShape{WT1}{wa1}{b}{sc}{<->wa1bc8t}{}
+\DeclareFontShape{WT1}{wa1}{b}{sl}{<->wa1bi8t}{}
+\DeclareFontShape{WT1}{wa1}{m}{it}{<->ssub*wa1/m/sl}{}
+\DeclareFontShape{WT1}{wa1}{bx}{n}{<->ssub*wa1/b/n}{}
+\DeclareFontShape{WT1}{wa1}{bx}{sc}{<->ssub*wa1/b/sc}{}
+\DeclareFontShape{WT1}{wa1}{bx}{sl}{<->ssub*wa1/b/sl}{}
+\DeclareFontShape{WT1}{wa1}{b}{it}{<->ssub*wa1/b/sl}{}
+\DeclareFontShape{WT1}{wa1}{bx}{it}{<->ssub*wa1/b/it}{}
+% family 'wcr'
+\DeclareFontFamily{WT1}{wcr}{}
+\DeclareFontShape{WT1}{wcr}{m}{n}{<->wcrr8t}{}
+\DeclareFontShape{WT1}{wcr}{m}{sc}{<->wcrrc8t}{}
+\DeclareFontShape{WT1}{wcr}{m}{sl}{<->wcrri8t}{}
+\DeclareFontShape{WT1}{wcr}{b}{n}{<->wcrb8t}{}
+\DeclareFontShape{WT1}{wcr}{b}{sc}{<->wcrbc8t}{}
+\DeclareFontShape{WT1}{wcr}{b}{sl}{<->wcrbi8t}{}
+\DeclareFontShape{WT1}{wcr}{m}{it}{<->ssub*wcr/m/sl}{}
+\DeclareFontShape{WT1}{wcr}{bx}{n}{<->ssub*wcr/b/n}{}
+\DeclareFontShape{WT1}{wcr}{bx}{sc}{<->ssub*wcr/b/sc}{}
+\DeclareFontShape{WT1}{wcr}{bx}{sl}{<->ssub*wcr/b/sl}{}
+\DeclareFontShape{WT1}{wcr}{b}{it}{<->ssub*wcr/b/sl}{}
+\DeclareFontShape{WT1}{wcr}{bx}{it}{<->ssub*wcr/b/it}{}
+% family 'wic'
+\DeclareFontFamily{WT1}{wic}{}
+\DeclareFontShape{WT1}{wic}{m}{n}{<->wicr8t}{}
+\DeclareFontShape{WT1}{wic}{m}{sc}{<->wicrc8t}{}
+% family 'wmcs'
+\DeclareFontFamily{WT1}{wmcs}{}
+\DeclareFontShape{WT1}{wmcs}{m}{n}{<->wmcsr8t}{}
+\DeclareFontShape{WT1}{wmcs}{m}{sc}{<->wmcsrc8t}{}
+\DeclareFontShape{WT1}{wmcs}{b}{n}{<->wmcsb8t}{}
+\DeclareFontShape{WT1}{wmcs}{b}{sc}{<->wmcsbc8t}{}
+\DeclareFontShape{WT1}{wmcs}{bx}{n}{<->ssub*wmcs/b/n}{}
+\DeclareFontShape{WT1}{wmcs}{bx}{sc}{<->ssub*wmcs/b/sc}{}
+% family 'wns'
+\DeclareFontFamily{WT1}{wns}{}
+\DeclareFontShape{WT1}{wns}{m}{n}{<->wnsr8t}{}
+\DeclareFontShape{WT1}{wns}{m}{sc}{<->wnsrc8t}{}
+\DeclareFontShape{WT1}{wns}{m}{sl}{<->wnsri8t}{}
+\DeclareFontShape{WT1}{wns}{b}{n}{<->wnsb8t}{}
+\DeclareFontShape{WT1}{wns}{b}{sc}{<->wnsbc8t}{}
+\DeclareFontShape{WT1}{wns}{b}{sl}{<->wnsbi8t}{}
+\DeclareFontShape{WT1}{wns}{m}{it}{<->ssub*wns/m/sl}{}
+\DeclareFontShape{WT1}{wns}{bx}{n}{<->ssub*wns/b/n}{}
+\DeclareFontShape{WT1}{wns}{bx}{sc}{<->ssub*wns/b/sc}{}
+\DeclareFontShape{WT1}{wns}{bx}{sl}{<->ssub*wns/b/sl}{}
+\DeclareFontShape{WT1}{wns}{b}{it}{<->ssub*wns/b/sl}{}
+\DeclareFontShape{WT1}{wns}{bx}{it}{<->ssub*wns/b/it}{}
+% family 'wth'
+\DeclareFontFamily{WT1}{wth}{}
+\DeclareFontShape{WT1}{wth}{m}{n}{<->wthr8t}{}
+\DeclareFontShape{WT1}{wth}{m}{sc}{<->wthrc8t}{}
+\DeclareFontShape{WT1}{wth}{b}{n}{<->wthb8t}{}
+\DeclareFontShape{WT1}{wth}{b}{sc}{<->wthbc8t}{}
+\DeclareFontShape{WT1}{wth}{bx}{n}{<->ssub*wth/b/n}{}
+\DeclareFontShape{WT1}{wth}{bx}{sc}{<->ssub*wth/b/sc}{}
+% family 'wvd'
+\DeclareFontFamily{WT1}{wvd}{}
+\DeclareFontShape{WT1}{wvd}{m}{n}{<->wvdr8t}{}
+\DeclareFontShape{WT1}{wvd}{m}{sc}{<->wvdrc8t}{}
+\DeclareFontShape{WT1}{wvd}{m}{sl}{<->wvdri8t}{}
+\DeclareFontShape{WT1}{wvd}{b}{n}{<->wvdb8t}{}
+\DeclareFontShape{WT1}{wvd}{b}{sc}{<->wvdbc8t}{}
+\DeclareFontShape{WT1}{wvd}{b}{sl}{<->wvdbi8t}{}
+\DeclareFontShape{WT1}{wvd}{m}{it}{<->ssub*wvd/m/sl}{}
+\DeclareFontShape{WT1}{wvd}{bx}{n}{<->ssub*wvd/b/n}{}
+\DeclareFontShape{WT1}{wvd}{bx}{sc}{<->ssub*wvd/b/sc}{}
+\DeclareFontShape{WT1}{wvd}{bx}{sl}{<->ssub*wvd/b/sl}{}
+\DeclareFontShape{WT1}{wvd}{b}{it}{<->ssub*wvd/b/sl}{}
+\DeclareFontShape{WT1}{wvd}{bx}{it}{<->ssub*wvd/b/it}{}
+% Below are dummy settings for avoiding warnings.
+% In fact CM families are not available in WT1.
+% family 'cmr' & 'cmss'
+\DeclareFontFamily{WT1}{cmr}{}
+\DeclareFontShape{WT1}{cmr}{m}{n}{<->ssub*wns/m/n}{}
+\DeclareFontFamily{WT1}{cmss}{}
+\DeclareFontShape{WT1}{cmss}{m}{n}{<->ssub*wa1/m/n}{}
+
+%--------------------------------------- WT1 encoding definition
+
+\DeclareTextAccent{\`}{WT1}{0}
+\DeclareTextAccent{\'}{WT1}{1}
+\DeclareTextAccent{\^}{WT1}{2}
+\DeclareTextAccent{\~}{WT1}{3}
+\DeclareTextAccent{\"}{WT1}{4}
+\DeclareTextAccent{\=}{WT1}{9}
+\DeclareTextCommand{\b}{WT1}[1]
+   {{\o@lign{\relax#1\crcr\hidewidth\sh@ft{29}%
+     \vbox to.2ex{\hbox{\char9}\vss}\hidewidth}}}
+\DeclareTextCommand{\c}{WT1}[1]
+   {\leavevmode\setbox\z@\hbox{#1}\ifdim\ht\z@=1ex\accent11 #1%
+     \else{\ooalign{\hidewidth\char11\hidewidth
+        \crcr\unhbox\z@}}\fi}
+\DeclareTextCommand{\d}{WT1}[1]
+   {{\o@lign{\relax#1\crcr\hidewidth\sh@ft{10}.\hidewidth}}}
+\DeclareTextCommand{\textperthousand}{WT1}{\char'247}
+\DeclareTextSymbol{\AE}{WT1}{198}
+\DeclareTextSymbol{\DH}{WT1}{208}
+\DeclareTextSymbol{\DJ}{WT1}{208}
+\DeclareTextSymbol{\OE}{WT1}{215}
+\DeclareTextSymbol{\O}{WT1}{216}
+\DeclareTextCommand{\SS}{WT1}{SS}
+\DeclareTextSymbol{\TH}{WT1}{222}
+\DeclareTextSymbol{\ae}{WT1}{230}
+\DeclareTextSymbol{\dh}{WT1}{240}
+\DeclareTextSymbol{\guillemotleft}{WT1}{19}
+\DeclareTextSymbol{\guillemotright}{WT1}{20}
+\DeclareTextSymbol{\guilsinglleft}{WT1}{14}
+\DeclareTextSymbol{\guilsinglright}{WT1}{15}
+\DeclareTextSymbol{\oe}{WT1}{247}
+\DeclareTextSymbol{\o}{WT1}{248}
+\DeclareTextSymbol{\quotedblbase}{WT1}{18}
+\DeclareTextSymbol{\quotesinglbase}{WT1}{13}
+\DeclareTextSymbol{\ss}{WT1}{255}
+\DeclareTextSymbol{\textasciicircum}{WT1}{`\^}
+\DeclareTextSymbol{\textasciitilde}{WT1}{`\~}
+\DeclareTextSymbol{\textbackslash}{WT1}{`\\}
+\DeclareTextSymbol{\textbar}{WT1}{`\|}
+\DeclareTextSymbol{\textbraceleft}{WT1}{`\{}
+\DeclareTextSymbol{\textbraceright}{WT1}{`\}}
+\DeclareTextSymbol{\textdollar}{WT1}{`\$}
+\DeclareTextSymbol{\textemdash}{WT1}{22}
+\DeclareTextSymbol{\textendash}{WT1}{21}
+\DeclareTextSymbol{\textexclamdown}{WT1}{189}
+\DeclareTextSymbol{\textgreater}{WT1}{`\>}
+\DeclareTextSymbol{\textless}{WT1}{`\<}
+\DeclareTextSymbol{\textquestiondown}{WT1}{190}
+\DeclareTextSymbol{\textquotedblleft}{WT1}{16}
+\DeclareTextSymbol{\textquotedblright}{WT1}{17}
+\DeclareTextSymbol{\textquotedbl}{WT1}{`\"}
+\DeclareTextSymbol{\textquoteleft}{WT1}{`\`}
+\DeclareTextSymbol{\textquoteright}{WT1}{`\'}
+\DeclareTextSymbol{\textsection}{WT1}{159}
+\DeclareTextSymbol{\textsterling}{WT1}{191}
+\DeclareTextSymbol{\textunderscore}{WT1}{95}
+\DeclareTextSymbol{\th}{WT1}{254}
+\DeclareTextComposite{\.}{WT1}{i}{`\i}
+\DeclareTextComposite{\v}{WT1}{S}{146}
+\DeclareTextComposite{\"}{WT1}{Y}{152}
+\DeclareTextComposite{\v}{WT1}{s}{178}
+\DeclareTextComposite{\"}{WT1}{y}{'212}
+\DeclareTextComposite{\`}{WT1}{A}{192}
+\DeclareTextComposite{\'}{WT1}{A}{193}
+\DeclareTextComposite{\^}{WT1}{A}{194}
+\DeclareTextComposite{\~}{WT1}{A}{195}
+\DeclareTextComposite{\"}{WT1}{A}{196}
+\DeclareTextComposite{\r}{WT1}{A}{197}
+\DeclareTextComposite{\c}{WT1}{C}{199}
+\DeclareTextComposite{\`}{WT1}{E}{200}
+\DeclareTextComposite{\'}{WT1}{E}{201}
+\DeclareTextComposite{\^}{WT1}{E}{202}
+\DeclareTextComposite{\"}{WT1}{E}{203}
+\DeclareTextComposite{\`}{WT1}{I}{204}
+\DeclareTextComposite{\'}{WT1}{I}{205}
+\DeclareTextComposite{\^}{WT1}{I}{206}
+\DeclareTextComposite{\"}{WT1}{I}{207}
+\DeclareTextComposite{\~}{WT1}{N}{209}
+\DeclareTextComposite{\`}{WT1}{O}{210}
+\DeclareTextComposite{\'}{WT1}{O}{211}
+\DeclareTextComposite{\^}{WT1}{O}{212}
+\DeclareTextComposite{\~}{WT1}{O}{213}
+\DeclareTextComposite{\"}{WT1}{O}{214}
+\DeclareTextComposite{\`}{WT1}{U}{217}
+\DeclareTextComposite{\'}{WT1}{U}{218}
+\DeclareTextComposite{\^}{WT1}{U}{219}
+\DeclareTextComposite{\"}{WT1}{U}{220}
+\DeclareTextComposite{\'}{WT1}{Y}{221}
+\DeclareTextComposite{\`}{WT1}{a}{224}
+\DeclareTextComposite{\'}{WT1}{a}{225}
+\DeclareTextComposite{\^}{WT1}{a}{226}
+\DeclareTextComposite{\~}{WT1}{a}{227}
+\DeclareTextComposite{\"}{WT1}{a}{228}
+\DeclareTextComposite{\r}{WT1}{a}{229}
+\DeclareTextComposite{\c}{WT1}{c}{231}
+\DeclareTextComposite{\`}{WT1}{e}{232}
+\DeclareTextComposite{\'}{WT1}{e}{233}
+\DeclareTextComposite{\^}{WT1}{e}{234}
+\DeclareTextComposite{\"}{WT1}{e}{235}
+\DeclareTextComposite{\`}{WT1}{i}{236}
+\DeclareTextComposite{\`}{WT1}{\i}{236}
+\DeclareTextComposite{\'}{WT1}{i}{237}
+\DeclareTextComposite{\'}{WT1}{\i}{237}
+\DeclareTextComposite{\^}{WT1}{i}{238}
+\DeclareTextComposite{\^}{WT1}{\i}{238}
+\DeclareTextComposite{\"}{WT1}{i}{239}
+\DeclareTextComposite{\"}{WT1}{\i}{239}
+\DeclareTextComposite{\~}{WT1}{n}{241}
+\DeclareTextComposite{\`}{WT1}{o}{242}
+\DeclareTextComposite{\'}{WT1}{o}{243}
+\DeclareTextComposite{\^}{WT1}{o}{244}
+\DeclareTextComposite{\~}{WT1}{o}{245}
+\DeclareTextComposite{\"}{WT1}{o}{246}
+\DeclareTextComposite{\`}{WT1}{u}{249}
+\DeclareTextComposite{\'}{WT1}{u}{250}
+\DeclareTextComposite{\^}{WT1}{u}{251}
+\DeclareTextComposite{\"}{WT1}{u}{252}
+\DeclareTextComposite{\'}{WT1}{y}{253}
+\DeclareTextSymbol{\textyen}{WT1}{'203}
+\DeclareTextSymbol{\textcopyright}{WT1}{'207}
+\DeclareTextSymbol{\textregistered}{WT1}{'206}
+\DeclareTextSymbol{\P}{WT1}{'211}
+\DeclareTextSymbol{\textbullet}{WT1}{'215}
+\DeclareTextSymbol{\textperiodcentered}{WT1}{'214}
+\DeclareTextSymbol{\texttrademark}{WT1}{'205}
+\DeclareTextSymbol{\textdag}{WT1}{'212}
+\DeclareTextSymbol{\textddag}{WT1}{'213}
+\DeclareTextSymbol{\textldots}{WT1}{'216}
+\DeclareTextSymbol{\textbrokenbar}{WT1}{'204}
+\DeclareTextSymbol{\textcent}{WT1}{'202}
+\DeclareTextSymbol{\textcurrency}{WT1}{'201}
+\DeclareTextSymbol{\texteuro}{WT1}{'200}
+\DeclareTextSymbol{\textordfeminine}{WT1}{'250}
+\DeclareTextSymbol{\textlogicalnot}{WT1}{'245}
+\DeclareTextSymbol{\texttwosuperior}{WT1}{'253}
+\DeclareTextSymbol{\textthreesuperior}{WT1}{'254}
+\DeclareTextSymbol{\textonesuperior}{WT1}{'252}
+\DeclareTextSymbol{\textordmasculine}{WT1}{'251}
+\DeclareTextSymbol{\textonequarter}{WT1}{'255}
+\DeclareTextSymbol{\textonehalf}{WT1}{'256}
+\DeclareTextSymbol{\textthreequarters}{WT1}{'257}
+\DeclareTextSymbol{\textmultiply}{WT1}{'240}
+\DeclareTextSymbol{\textdivide}{WT1}{'241}
+
+%--------------------------------------- Annihilate original 'winenc'
+
+% check if winenc is already loaded
+\@ifpackageloaded{winenc}{%
+  % then rollback process is enabled
+  \@tempswatrue
+}{%else
+  % otherwise no rollback, and blocks winenc
+  \@tempswafalse
+  \@namedef{ver@winenc.sty}{2100/01/01}%
+}
+\bxDebug{winenc \if@tempswa not \fi loaded}
+
+%% rollback process
+\if@tempswa
+
+\def\do#1{% \XX
+  % undeclare a text command \XX
+  \expandafter\let\csname T1\string#1\endcsname\@undefined
+}
+% target command list
+\do\P
+\do\textbrokenbar
+\do\textbullet
+\do\textcent
+\do\textcopyright
+\do\textcurrency
+\do\textdag
+\do\textddag
+\do\textdivide
+\do\texteuro
+\do\textldots
+\do\textlogicalnot
+\do\textmultiply
+\do\textonehalf
+\do\textonequarter
+\do\textonesuperior
+\do\textordfeminine
+\do\textordmasculine
+\do\textperiodcentered
+\do\textregistered
+\do\textthreequarters
+\do\textthreesuperior
+\do\texttrademark
+\do\texttwosuperior
+\do\textyen
+
+% lastly load the genuine T1 definition
+\input{t1enc.def}
+
+\fi
+
+%--------------------------------------- Provide \WTT... commands
+
+\def\do#1#2{% {<NAME>}{<code>}
+  % make \WTT<NAME> a chardef with <code>
+  \expandafter\chardef\csname WTT#1\endcsname=#2\relax
+}
+% target command list
+\do{yen}{'203}
+\do{copyright}{'207}
+\do{registered}{'206}
+\do{paragraph}{'211}
+\do{bullet}{'215}
+\do{periodcentered}{'214}
+\do{trademark}{'205}
+\do{dag}{'212}
+\do{ddag}{'213}
+\do{ldots}{'216}
+\do{brokenbar}{'204}
+\do{cent}{'202}
+\do{currency}{'201}
+\do{euro}{'200}
+\do{ordfeminine}{'250}
+\do{logicalnot}{'245}
+\do{twosuperior}{'253}
+\do{threesuperior}{'254}
+\do{onesuperior}{'252}
+\do{ordmasculine}{'251}
+\do{onequarter}{'255}
+\do{onehalf}{'256}
+\do{threequarters}{'257}
+\do{multiply}{'240}
+\do{divide}{'241}
+
+%--------------------------------------- make commands amphibious
+
+\def\do#1#2#3#4{% \XX \textXX {<c1>}{<c2>}
+  % THe command will be redefined only if it has not been
+  % redefined by packages other than winenc.
+  \@tempswafalse
+  \mathchardef\bxwe@temp="#3\relax %(LaTeX original)
+  \ifx#1\bxwe@temp \@tempswatrue \fi
+  \def\bxwe@temp{\ifmmode\mathchar"#3\else\char'#4 \fi}% (winenc)
+  \ifx#1\bxwe@temp \@tempswatrue \fi
+  \def\bxwe@temp{\relax\ifmmode\mathchar"#3\else\char'#4 \fi}%
+  \ifx#1\bxwe@temp \@tempswatrue \fi
+  \if@tempswa
+    % redefine the command:
+    % \XX expands to \textXX in text mode.
+    \def#1{\relax\ifmmode\mathchar"#3 \else #2\fi}%
+  \fi
+}
+% target command list
+\do \pm \textpm {2206} {242}
+\do \mu \textmu {0116} {244}
+
+%--------------------------------------- Set default encoding
+
+% set \encodingdefault
+\let\encodingdefault\bxwe@dflt@enc
+% change to that encoding
+\fontencoding\encodingdefault\selectfont
+
+%--------------------------------------- all done
+\let\do\relax
+\endinput
+%% EOF
